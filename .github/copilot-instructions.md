@@ -1,1 +1,1 @@
-Follow the project guidance in [AGENTS.md](../AGENTS.md). Keep changes scoped to Thejway's bus-tracking app and its approved Phase 1 requirements. Do not treat demo integrations as production features or implement Phase 2 payments without approval.
+Follow [AGENTS.md](../AGENTS.md) and the [Thejway bus-tracking skill](skills/thejway-bus-tracking/SKILL.md). Keep changes scoped to the approved Phase 1 requirements. Vercel + Google Firestore is the planned direction, not a configured integration. Do not treat demo behavior as production or implement Phase 2 payments.
