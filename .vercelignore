@@ -1,0 +1,10 @@
+downloads/
+*.m4a
+firebase-debug.log
+frontend/prototype-v2/
+.github/
+AGENTS.md
+docs/
+dist/
+.env*
+.vercel/
