@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-dim": "#dad9e3",
+          "text-primary": "#1E1B4B",
+          "on-surface-variant": "#454653",
+          "surface": "#fbf8ff",
+          "badge-scheduled-text": "#0369A1",
+          "primary": "#4953bc",
+          "badge-delayed-bg": "#FEE2E2",
+          "error-container": "#ffdad6",
+          "border-subtle": "#E0E7FF",
+          "text-secondary": "#4338CA",
+          "surface-card": "#FFFFFF",
+          "tertiary-fixed-dim": "#7bd1fa",
+          "on-background": "#1a1b22",
+          "periwinkle-light": "#C7D2FE",
+          "surface-container-low": "#f4f2fd",
+          "secondary": "#674bb5",
+          "surface-container": "#eeedf7",
+          "on-primary": "#ffffff",
+          "surface-container-highest": "#e3e1ec",
+          "on-tertiary-fixed": "#001e2b",
+          "on-secondary": "#ffffff",
+          "badge-active-text": "#3730A3",
+          "tertiary-container": "#449fc6",
+          "surface-container-high": "#e8e7f1",
+          "on-error-container": "#93000a",
+          "tertiary": "#006686",
+          "badge-delayed-text": "#991B1B",
+          "sky-tint": "#E0F2FE",
+          "surface-variant": "#e3e1ec",
+          "tertiary-fixed": "#c0e8ff",
+          "border-hover": "#C7D2FE",
+          "on-error": "#ffffff",
+          "on-tertiary-fixed-variant": "#004d66",
+          "on-tertiary-container": "#003244",
+          "primary-fixed-dim": "#bdc2ff",
+          "lavender-mist": "#DDD6FE",
+          "text-muted": "#6366F1",
+          "inverse-primary": "#bdc2ff",
+          "outline": "#767684",
+          "inverse-surface": "#2f3038",
+          "lavender-subtle": "#EDE9FE",
+          "badge-active-bg": "#E0E7FF",
+          "on-secondary-container": "#3f1e8c",
+          "surface-card-tint": "#F5F3FF",
+          "surface-canvas": "#FAF8FF",
+          "secondary-fixed-dim": "#cebdff",
+          "secondary-container": "#ab8ffe",
+          "on-surface": "#1a1b22",
+          "surface-container-lowest": "#ffffff",
+          "surface-tint": "#4953bc",
+          "background": "#fbf8ff",
+          "primary-fixed": "#e0e0ff",
+          "secondary-fixed": "#e8ddff",
+          "outline-variant": "#c6c5d5",
+          "surface-bright": "#fbf8ff",
+          "inverse-on-surface": "#f1effa",
+          "error": "#ba1a1a",
+          "on-primary-fixed-variant": "#2f3aa3",
+          "on-secondary-fixed": "#21005e",
+          "on-secondary-fixed-variant": "#4f319c",
+          "badge-scheduled-bg": "#E0F2FE",
+          "on-primary-container": "#101b8a",
+          "primary-container": "#818cf8",
+          "lilac-pastel": "#C4B5FD",
+          "on-tertiary": "#ffffff",
+          "on-primary-fixed": "#000767"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter-tablet": "1.25rem",
+          "space-xl": "1.75rem",
+          "space-sm": "0.5rem",
+          "gutter": "1rem",
+          "space-lg": "1.25rem",
+          "margin-tablet": "1.5rem",
+          "space-md": "1rem",
+          "margin": "1rem",
+          "space-xs": "0.25rem"
+        },
+        "fontFamily": {
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "label-md": [
+            "Plus Jakarta Sans"
+          ],
+          "label-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-md": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "label-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "headline-lg-mobile": [
+            "Plus Jakarta Sans"
+          ]
+        },
+        "fontSize": {
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-md": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-sm": [
+            "16px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-lg": [
+            "15px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "500"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.03em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-lg-mobile": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ]
+        }
+      },
+    },
+  }
+</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-border-subtle/80 shadow-[0_1px_8px_rgba(73,83,188,0.06)]"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary flex-shrink-0"><span class="material-symbols-outlined text-[22px]">directions_bus</span></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-text-primary font-bold truncate leading-tight">Thejus Transit</span><span class="font-label-sm text-label-sm text-text-muted truncate">Live GPS</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-lavender-subtle transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><button aria-label="Profile" class="w-10 h-10 flex items-center justify-center p-0.5 rounded-full hover:ring-2 hover:ring-primary-container transition-all"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-lavender-mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCisDw7o8e5PVFRDr8dwd0XOaQaKEVCN6HnXpf5chI1lngSe5pHsGLKn1XqckhpHxnUmBwnZ16lMLi-JDBXlPqox7Qx4W0ksai8Zk4r0ZCSXVG80b8e5RcwDfBCV0S9DP6fjhLJpSQQ_zWUQlNOOjiNAleOqqsxJadGxTqjCrP3sq1ebtgCA1w32KyLzrDWl1D1WtDZpaY4vM1lAyI79rHgNxyC8b50DkYx7YuSGfDyngvMYpmbcdj8"></button></div></div></header><main class="flex-1 w-full bg-surface pt-14 pb-20"><div class="flex flex-col w-full relative">
+<!-- Interactive Live Map Viewport Area -->
+<div class="relative w-full h-[480px] bg-surface-container overflow-hidden">
+<!-- Styled Geographic Map Background with data-location for map static pipeline -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-location="Kanjirappally to Thejus Engineering College Kerala" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC9ExWAa0y6jNNq9dcqgIgjhRgotjBlwhEUj-QlOcAH6GN6MJoCnu-iIspwMsQPZB_wPzjSdVHiC0L729pnIR0iFXFMlMilhvh7YcNzSGxhPyhi04AV961AwDOZ548mCOEusaS8uAQW2XoaqYG2DVfF5xCTycZKcW2ahL-zb-lTAS0bLIHPnF8y-M6BvyQufKKzkBrY-2WNJwm6gElNcqmylSwZwHNUFoWzGAOFZwOYXDmIDeN6e6Hs')"></div>
+<!-- Soft Ambient Grid & Route Layer Over Map Canvas -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" fill="none" viewBox="0 0 390 480" xmlns="http://www.w3.org/2000/svg">
+<!-- Glow Under Route Line - Pastel Violet glow -->
+<path d="M 64 390 C 85 340, 110 320, 155 285 C 195 255, 230 240, 250 170 C 265 125, 285 105, 305 75" stroke="#818cf8" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.35" stroke-width="12"></path>
+<!-- Completed Passed Path (Soft Violet/Teal Tinted Accent) -->
+<path d="M 64 390 C 85 340, 110 320, 155 285" stroke="#674bb5" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+<!-- Active Route Segment (Pastel Violet-Blue #818CF8) -->
+<path d="M 155 285 C 195 255, 230 240, 250 170 C 265 125, 285 105, 305 75" stroke="#818cf8" stroke-dasharray="8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+<!-- Start Pin: Kanjirappally Town (Lavender/Periwinkle Marker) -->
+<circle cx="64" cy="390" fill="#c7d2fe" fill-opacity="0.6" r="10"></circle>
+<circle cx="64" cy="390" fill="#674bb5" r="6"></circle>
+<circle cx="64" cy="390" fill="#ffffff" r="2.5"></circle>
+<!-- Intermediate Stop Marker: Marymatha Junction (Passed) -->
+<circle cx="155" cy="285" fill="#674bb5" r="5"></circle>
+<circle cx="155" cy="285" fill="#ffffff" r="2"></circle>
+<!-- Intermediate Stop Marker: Vechoochira (Approaching) -->
+<circle cx="215" cy="225" fill="#818cf8" fill-opacity="0.45" r="7"></circle>
+<circle cx="215" cy="225" fill="#4953bc" r="4.5"></circle>
+<!-- Destination Pin: Thejus Engineering College (Soft Red Accent Marker) -->
+<circle cx="305" cy="75" fill="#ffdad6" fill-opacity="0.75" r="14"></circle>
+<circle cx="305" cy="75" fill="#ba1a1a" r="8"></circle>
+<circle cx="305" cy="75" fill="#ffffff" r="3"></circle>
+</svg>
+<!-- Animated Bus Icon Pin along Path (Current Position: Ahead of Marymatha) -->
+<div class="absolute top-[218px] left-[182px] -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-700 ease-out flex flex-col items-center pointer-events-none" id="live-bus-marker">
+<!-- Radar Pulse Ring in pastel violet-blue -->
+<div class="absolute -inset-3 rounded-full bg-primary-container/35 animate-ping"></div>
+<!-- Vehicle Bubble Badge -->
+<div class="relative w-11 h-11 rounded-full bg-primary-container text-white flex items-center justify-center shadow-lg shadow-primary-container/40 ring-4 ring-white">
+<span class="material-symbols-outlined text-[24px]">directions_bus</span>
+</div>
+<!-- Direction Indicator Arrow -->
+<div class="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[6px] border-t-primary-container -mt-0.5"></div>
+<!-- Floating Label -->
+<span class="mt-1 px-2 py-0.5 rounded-full bg-text-primary/90 backdrop-blur-sm text-surface-bright font-label-sm text-label-sm shadow-sm whitespace-nowrap">
+        Bus 01
+      </span>
+</div>
+<!-- College Destination Tooltip Label -->
+<div class="absolute top-8 right-6 z-10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-border-subtle text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-error">school</span>
+<span class="font-label-sm text-label-sm font-bold text-text-primary">Thejus Engg College</span>
+</div>
+<!-- Start Label (Kanjirappally) -->
+<div class="absolute bottom-6 left-4 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/95 backdrop-blur-md shadow-sm border border-border-subtle text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-text-secondary font-medium">Kanjirappally</span>
+</div>
+<!-- Top Left Floating Badges: Live GPS Sync & Speedometer -->
+<div class="absolute top-3 left-3 z-30 flex flex-col gap-2"><!-- Live Sync Pill in pastel violet/periwinkle with tactile touch -->
+<div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-border-subtle shadow-sm select-none cursor-pointer transition-transform duration-150 active:scale-95 hover:shadow">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="font-label-sm text-label-sm text-text-secondary font-bold tracking-tight">Active Live Sync</span>
+</div>
+<!-- Live Speed Badge in soft deep indigo / violet-accented with tactile feedback -->
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-text-primary/90 backdrop-blur-md shadow-md text-surface-bright w-max border border-border-subtle/30 select-none cursor-pointer transition-transform duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[18px] text-lilac-pastel">speed</span>
+<div class="flex items-baseline gap-0.5">
+<span class="font-headline-sm text-headline-sm font-bold text-surface-bright leading-none" id="live-speed-display">42</span>
+<span class="font-label-sm text-label-sm text-periwinkle-light font-medium">km/h</span>
+</div>
+</div></div>
+<!-- Top Right Floating Telemetry HUD Card with pastel violet & lavender styling -->
+<div class="absolute top-3 right-3 z-30 w-44 rounded-2xl bg-white/95 backdrop-blur-md p-3 shadow-md border border-border-subtle shadow-primary/5 transition-all duration-150 active:scale-95 cursor-pointer select-none">
+<div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-border-subtle/50">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px] text-text-secondary">schedule</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold text-text-secondary">Trip ETA</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-badge-active-bg text-badge-active-text font-label-sm text-label-sm font-bold transition-transform active:scale-95">On Time</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-text-primary leading-tight" id="trip-eta">12</span>
+<span class="font-label-md text-label-md text-text-secondary font-semibold">min</span>
+<span class="font-body-sm text-body-sm text-outline-variant mx-1">•</span>
+<span class="font-label-md text-label-md font-bold text-text-primary" id="trip-distance">4.2</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">km left</span>
+</div>
+<div class="mt-2 pt-2 bg-lavender-subtle/70 rounded-xl p-2 flex flex-col gap-0.5 border border-border-subtle/50 transition-colors active:bg-lavender-subtle">
+<span class="font-label-sm text-label-sm text-text-secondary font-medium">Target Stop:</span>
+<div class="flex items-center gap-1 text-text-primary font-label-md text-label-md font-bold truncate">
+<span class="material-symbols-outlined text-[14px] text-primary animate-pulse">near_me</span>
+<span class="truncate">Vechoochira</span>
+</div>
+</div>
+</div>
+<!-- Map Zoom & Recenter Floating Controls (Bottom Right of Map Area) with periwinkle/purple styling -->
+<div class="absolute bottom-4 right-3 z-30 flex flex-col gap-1.5"><button aria-label="Re-center Bus" class="w-10 h-10 rounded-xl bg-white/95 backdrop-blur-md text-primary shadow-md border border-border-subtle flex items-center justify-center transition-all duration-150 active:scale-90 active:bg-lavender-subtle hover:bg-lavender-subtle" id="btn-recenter">
+<span class="material-symbols-outlined text-[20px] transition-transform active:rotate-45">my_location</span>
+</button>
+<button aria-label="Map Layers" class="w-10 h-10 rounded-xl bg-white/95 backdrop-blur-md text-on-surface-variant shadow-md border border-border-subtle flex items-center justify-center transition-all duration-150 active:scale-90 active:bg-lavender-subtle hover:text-primary hover:bg-lavender-subtle">
+<span class="material-symbols-outlined text-[20px]">layers</span>
+</button></div>
+</div>
+<!-- Bottom Sheet Telemetry & Route Action Section in soft periwinkle-purple styling -->
+<div class="w-full bg-surface-card rounded-t-3xl px-margin pt-4 pb-6 shadow-[0_-4px_24px_rgba(73,83,188,0.1)] border-t border-border-subtle relative z-40 -mt-3 flex flex-col gap-4">
+<!-- Grabber Handle -->
+<div class="w-10 h-1 rounded-full bg-outline-variant/60 self-center mb-1"></div>
+<!-- Header Card: Bus Number, Route Name & Live Toggle Indicator -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-2xl bg-lavender-subtle text-primary flex items-center justify-center flex-shrink-0 border border-border-subtle">
+<span class="material-symbols-outlined text-[24px]">directions_bus</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-text-primary truncate">Bus 01</h2>
+<span class="px-2 py-0.5 rounded-full bg-badge-active-bg text-badge-active-text font-label-sm text-label-sm font-bold uppercase tracking-tight">Active</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Kanjirappally – Thejus Campus</span>
+</div>
+</div>
+<!-- Real-Time Auto-Refresh Control Chip -->
+<button aria-label="Live Tracking Status" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-text-secondary hover:text-primary border border-border-subtle transition-all duration-150 active:scale-95 active:bg-lavender-subtle cursor-pointer select-none" id="refresh-indicator">
+<span class="material-symbols-outlined text-[16px] text-primary animate-spin" style="animation-duration: 4s;">sync</span>
+<span class="font-label-sm text-label-sm font-semibold">Live Feed</span>
+</button>
+</div>
+<!-- Journey Stop Milestones (Horizontal or Dual Cards) -->
+<div class="grid grid-cols-2 gap-space-sm"><!-- Current Stop with tactile tap -->
+<div class="p-3 rounded-2xl bg-surface-container-low border border-border-subtle/80 flex flex-col gap-1 transition-all duration-150 cursor-pointer select-none active:scale-95 active:bg-lavender-subtle/60">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-tight text-secondary">Passed Stop</span>
+</div>
+<div class="font-label-lg text-label-lg font-bold text-text-primary truncate">Marymatha Jn</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Dep 07:48 AM</span>
+</div>
+<!-- Next Target Stop with tactile tap -->
+<div class="p-3 rounded-2xl bg-lavender-subtle/80 border border-periwinkle-light/60 flex flex-col gap-1 transition-all duration-150 cursor-pointer select-none active:scale-95 active:bg-lavender-subtle">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px] text-primary animate-pulse">schedule</span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-tight text-primary">Next Stop</span>
+</div>
+<div class="font-label-lg text-label-lg font-bold text-text-primary truncate">Vechoochira</div>
+<span class="font-body-sm text-body-sm text-primary font-bold">Est 07:55 AM (7 min)</span>
+</div></div>
+<!-- Driver & Occupancy Snippet -->
+<div class="p-3 rounded-2xl bg-surface-container-low/60 border border-border-subtle flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<img alt="Driver Portrait" class="w-9 h-9 rounded-full object-cover shadow-sm ring-2 ring-lavender-mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT44sLCIUDs1n8rp3YtPWIAERmnaJhwqOIHTTjnNjxVgkMYPqH6-JVh1nkXJBQJ8u7ffaP2DH68GJBRsWkIWJivXTreFKVP7tuJllgM8izTPndkEiXduHQbc0TpEdbnlGb3lcAvDoOhzzMt3t-CFsfABzhs35wkPj4zyjZZ1KwTOsZYj9LMBGPj9K_ANwXaXaCLDwF7NOIO61waZR4RrL0Ef8PmRBDx98j1KfMQvBGLwh9liy5D5jzTx6zVfDtrQXTqA">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-text-primary">Rajesh K. Pillai</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Driver • +91 94471 28910</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-border-subtle">
+<span class="material-symbols-outlined text-[18px] text-primary">airline_seat_recline_normal</span>
+<span class="font-label-sm text-label-sm font-semibold text-text-primary">38/44 Seats</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-2 pt-1"><!-- Primary CTA with punchy spring press -->
+<button class="w-full h-12 rounded-xl bg-primary-container text-white font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 shadow-md shadow-primary-container/30 hover:bg-primary transition-all duration-150 active:scale-[0.97] active:shadow-inner cursor-pointer select-none" id="btn-view-route">
+<span class="material-symbols-outlined text-[20px] transition-transform active:rotate-12">alt_route</span>
+<span class="">View Full Route &amp; Stops</span>
+</button>
+<div class="flex items-center justify-between px-1">
+<button class="flex items-center gap-1.5 py-1 px-2.5 rounded-lg text-text-secondary hover:text-primary transition-all duration-150 active:scale-95 active:bg-lavender-subtle font-medium cursor-pointer select-none">
+<span class="material-symbols-outlined text-[16px] text-primary">phone_in_talk</span>
+<span class="font-label-sm text-label-sm font-semibold">Call Driver</span>
+</button>
+<button class="flex items-center gap-1.5 py-1 px-2.5 rounded-lg text-on-surface-variant hover:text-error transition-all duration-150 active:scale-95 active:bg-error-container/40 font-medium cursor-pointer select-none">
+<span class="material-symbols-outlined text-[16px]">report_problem</span>
+<span class="font-label-sm text-label-sm font-semibold">Report Delay</span>
+</button>
+</div></div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for simulated GPS movement & speed flicker
+  (function() {
+    const speedEl = document.getElementById('live-speed-display');
+    const busMarker = document.getElementById('live-bus-marker');
+    const recenterBtn = document.getElementById('btn-recenter');
+   
+    let baseSpeed = 42;
+    setInterval(() => {
+      // Fluctuating realistic speeds between 39-44 km/h
+      const variation = Math.floor(Math.random() * 5) - 2;
+      const currentSpeed = Math.max(38, Math.min(46, baseSpeed + variation));
+      if (speedEl) {
+        speedEl.innerText = currentSpeed;
+      }
+    }, 3200);
+
+    if (recenterBtn && busMarker) {
+      recenterBtn.addEventListener('click', () => {
+        busMarker.classList.add('scale-125');
+        setTimeout(() => {
+          busMarker.classList.remove('scale-125');
+        }, 300);
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl border-t border-border-subtle shadow-[0_-2px_12px_rgba(73,83,188,0.06)]" data-active-classes="text-primary font-label-md"><div class="h-16 px-space-xs flex items-center justify-around"><a class="flex flex-col items-center justify-center w-16 h-12 gap-0.5 text-on-surface-variant hover:text-primary transition-all duration-150 active:scale-90 select-none" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">directions_bus</span><span class="font-label-sm text-label-sm">Home</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-16 h-12 gap-0.5 transition-all duration-150 active:scale-90 text-primary font-label-md select-none" data-path="live-gps" href="#"><span class="material-symbols-outlined text-[24px]">near_me</span><span class="font-label-sm text-label-sm font-bold">Live GPS</span></a><a class="flex flex-col items-center justify-center w-16 h-12 gap-0.5 text-on-surface-variant hover:text-primary transition-all duration-150 active:scale-90 select-none" data-path="attendance" href="#"><span class="material-symbols-outlined text-[24px]">badge</span><span class="font-label-sm text-label-sm">Attendance</span></a><a class="flex flex-col items-center justify-center w-16 h-12 gap-0.5 text-on-surface-variant hover:text-primary transition-all duration-150 active:scale-90 select-none" data-path="fee-payment" href="#"><span class="material-symbols-outlined text-[24px]">payments</span><span class="font-label-sm text-label-sm">Fee Payment</span></a></div></nav>
+
+</body></html>

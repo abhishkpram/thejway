@@ -1,0 +1,1 @@
+Follow the project guidance in [AGENTS.md](../AGENTS.md). Keep changes scoped to Thejway's bus-tracking app and its approved Phase 1 requirements. Do not treat demo integrations as production features or implement Phase 2 payments without approval.

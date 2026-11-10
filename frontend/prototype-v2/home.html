@@ -1,0 +1,473 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<title>Thejus College Bus Transit - Login</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration matching Pastel Lavender Transit Theme -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-dim": "#dad9e3",
+            "text-primary": "#1E1B4B",
+            "on-surface-variant": "#454653",
+            "surface": "#fbf8ff",
+            "badge-scheduled-text": "#0369A1",
+            "primary": "#4953bc",
+            "badge-delayed-bg": "#FEE2E2",
+            "error-container": "#ffdad6",
+            "border-subtle": "#E0E7FF",
+            "text-secondary": "#4338CA",
+            "surface-card": "#FFFFFF",
+            "tertiary-fixed-dim": "#7bd1fa",
+            "on-background": "#1a1b22",
+            "periwinkle-light": "#C7D2FE",
+            "surface-container-low": "#f4f2fd",
+            "secondary": "#674bb5",
+            "surface-container": "#eeedf7",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#e3e1ec",
+            "on-tertiary-fixed": "#001e2b",
+            "on-secondary": "#ffffff",
+            "badge-active-text": "#3730A3",
+            "tertiary-container": "#449fc6",
+            "surface-container-high": "#e8e7f1",
+            "on-error-container": "#93000a",
+            "tertiary": "#006686",
+            "badge-delayed-text": "#991B1B",
+            "sky-tint": "#E0F2FE",
+            "surface-variant": "#e3e1ec",
+            "tertiary-fixed": "#c0e8ff",
+            "border-hover": "#C7D2FE",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#004d66",
+            "on-tertiary-container": "#003244",
+            "primary-fixed-dim": "#bdc2ff",
+            "lavender-mist": "#DDD6FE",
+            "text-muted": "#6366F1",
+            "inverse-primary": "#bdc2ff",
+            "outline": "#767684",
+            "inverse-surface": "#2f3038",
+            "lavender-subtle": "#EDE9FE",
+            "badge-active-bg": "#E0E7FF",
+            "on-secondary-container": "#3f1e8c",
+            "surface-card-tint": "#F5F3FF",
+            "surface-canvas": "#FAF8FF",
+            "secondary-fixed-dim": "#cebdff",
+            "secondary-container": "#ab8ffe",
+            "on-surface": "#1a1b22",
+            "surface-container-lowest": "#ffffff",
+            "surface-tint": "#4953bc",
+            "background": "#fbf8ff",
+            "primary-fixed": "#e0e0ff",
+            "secondary-fixed": "#e8ddff",
+            "outline-variant": "#c6c5d5",
+            "surface-bright": "#fbf8ff",
+            "inverse-on-surface": "#f1effa",
+            "error": "#ba1a1a",
+            "on-primary-fixed-variant": "#2f3aa3",
+            "on-secondary-fixed": "#21005e",
+            "on-secondary-fixed-variant": "#4f319c",
+            "badge-scheduled-bg": "#E0F2FE",
+            "on-primary-container": "#101b8a",
+            "primary-container": "#818cf8",
+            "lilac-pastel": "#C4B5FD",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#000767"
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          boxShadow: {
+            'card-elevated': '0 20px 40px -15px rgba(73, 83, 188, 0.12), 0 0 1px 1px rgba(224, 231, 255, 0.6)',
+            'btn-primary': '0 10px 25px -5px rgba(73, 83, 188, 0.4), 0 4px 6px -2px rgba(73, 83, 188, 0.2)',
+            'pill': '0 3px 12px rgba(73, 83, 188, 0.12)',
+            'soft': '0 4px 18px rgba(99, 102, 241, 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom App Styles -->
+<style data-purpose="custom-mobile-styling">
+    body {
+      -webkit-tap-highlight-color: transparent;
+      background-color: #eef2ff;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+   
+    .status-bar-blur {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+   
+    .transit-dots-bg {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1.2px, transparent 1.2px);
+      background-size: 16px 16px;
+    }
+  </style>
+<!-- END: Custom App Styles -->
+</head>
+<body class="min-h-screen flex items-center justify-center p-0 sm:p-4 text-text-primary antialiased selection:bg-primary-container selection:text-white">
+<!-- BEGIN: Mobile Device Canvas Frame -->
+<div class="w-full max-w-[430px] min-h-screen sm:min-h-[890px] bg-surface-canvas flex flex-col justify-between sm:rounded-[44px] shadow-2xl relative overflow-hidden sm:border-[8px] sm:border-slate-800">
+<!-- BEGIN: Header & Hero -->
+<header class="relative bg-gradient-to-br from-[#4f56c7] via-[#6366f1] to-[#8b5cf6] pt-3 pb-12 px-6 text-white overflow-hidden shrink-0">
+<!-- Subtle Pattern Background -->
+<div class="absolute inset-0 transit-dots-bg opacity-30 pointer-events-none"></div>
+<!-- Glowing Ambient Accents -->
+<div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-white/20 blur-2xl pointer-events-none"></div>
+<div class="absolute -left-12 -top-10 w-40 h-40 rounded-full bg-indigo-300/30 blur-2xl pointer-events-none"></div>
+<!-- iOS Status Bar Simulation -->
+<div class="flex items-center justify-between text-xs font-semibold tracking-tight text-white/95 pt-1 pb-3" data-purpose="ios-status-bar">
+<span class="tracking-normal font-semibold text-sm">9:41</span>
+<div class="flex items-center space-x-1.5">
+<!-- Signal Icon -->
+<svg class="w-4 h-3.5 fill-current" viewBox="0 0 17 12">
+<rect height="4" rx="0.5" width="3" x="0" y="8"></rect>
+<rect height="6.5" rx="0.5" width="3" x="4.5" y="5.5"></rect>
+<rect height="9" rx="0.5" width="3" x="9.2" y="3"></rect>
+<rect height="12" rx="0.5" width="3" x="14" y="0"></rect>
+</svg>
+<!-- Wifi Icon -->
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 16 12">
+<path d="M8 12a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-4.9-3.8a6.9 6.9 0 0 1 9.8 0 .8.8 0 0 0 1.1-1.1 8.5 8.5 0 0 0-12 0 .8.8 0 1 0 1.1 1.1zm-2.4-2.5a10.5 10.5 0 0 1 14.6 0 .8.8 0 0 0 1.1-1.1 12 12 0 0 0-16.8 0 .8.8 0 0 0 1.1 1.1z"></path>
+</svg>
+<!-- Battery Icon -->
+<div class="flex items-center">
+<div class="w-5 h-2.5 border border-white/90 rounded-[3px] p-[1.5px] flex items-center">
+<div class="h-full w-full bg-white rounded-[1px]"></div>
+</div>
+<div class="w-0.5 h-1 bg-white/90 rounded-r-sm ml-0.5"></div>
+</div>
+</div>
+</div>
+<!-- App Crest & Identity Bar -->
+<div class="flex items-center justify-between mt-1 mb-4" data-purpose="college-brand-identity">
+<div class="flex items-center gap-3">
+<!-- College Crest / Bus Shield Badge -->
+<div class="w-11 h-11 rounded-2xl bg-white/20 border border-white/35 backdrop-blur-md flex items-center justify-center p-2 shadow-sm">
+<svg class="w-full h-full text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<rect height="15" rx="3" width="16" x="4" y="3"></rect>
+<line x1="4" x2="20" y1="11" y2="11"></line>
+<circle cx="8" cy="15" fill="currentColor" r="1.5"></circle>
+<circle cx="16" cy="15" fill="currentColor" r="1.5"></circle>
+<path d="M6 18v2a1 1 0 0 0 1 1h1"></path>
+<path d="M18 18v2a1 1 0 0 1-1 1h-1"></path>
+</svg>
+</div>
+<div>
+<span class="text-[10px] font-bold tracking-widest uppercase text-lavender-subtle block">Thejus Transit Portal</span>
+<h1 class="text-base font-extrabold tracking-tight text-white leading-tight">
+              Campus Fleet Access
+            </h1>
+</div>
+</div>
+<!-- Live GPS Status Pill -->
+<div class="flex items-center gap-1.5 bg-white/15 backdrop-blur-md border border-white/25 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white shadow-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="">Live GPS</span>
+</div>
+</div>
+<!-- Welcome Header -->
+<div class="mt-2 text-left">
+<h2 class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
+<span class="">Welcome Back!</span>
+<span class="text-xl"></span>
+</h2>
+<p class="text-xs text-lavender-subtle/95 mt-1.5 leading-relaxed font-medium max-w-[340px]">
+          Sign in to access your assigned route, live GPS &amp; digital transit pass.
+        </p>
+</div>
+</header>
+<!-- END: Header & Hero -->
+<!-- BEGIN: Form Container & Elevated Card -->
+<main class="-mt-7 flex-1 px-4 pb-5 flex flex-col justify-between z-10" data-purpose="login-container">
+<!-- Elevated Login Card -->
+<div class="bg-surface-card rounded-3xl p-5 shadow-card-elevated border border-border-subtle flex flex-col">
+<!-- BEGIN: Floating Segmented Pill Role Switcher -->
+<div class="mb-5" data-purpose="role-tab-selector">
+<div class="p-1 bg-surface-container-low rounded-full border border-border-subtle flex relative">
+<!-- Student Tab -->
+<button aria-selected="true" class="tab-pill flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-full text-xs font-bold bg-white text-primary shadow-pill cursor-pointer select-none" data-purpose="role-btn-student" id="tabStudent" onclick="selectRole('student')" type="button">
+<svg class="w-4 h-4 stroke-[2.2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+<path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"></path>
+</svg>
+<span class="">Student</span>
+</button>
+<!-- Faculty / Staff Tab -->
+<button aria-selected="false" class="tab-pill flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-full text-xs font-semibold text-on-surface-variant hover:text-text-primary hover:bg-white/60 cursor-pointer select-none" data-purpose="role-btn-faculty" id="tabFaculty" onclick="selectRole('faculty')" type="button">
+<svg class="w-4 h-4 stroke-[2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
+<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+</svg>
+<span class="">Faculty / Staff</span>
+</button>
+</div>
+</div>
+<!-- END: Role Switcher -->
+<!-- Dynamic Login Form -->
+<form class="space-y-4" data-purpose="credential-form" id="transitLoginForm" onsubmit="handleFormSubmit(event)">
+<!-- Input 1: Student Roll No / Staff ID -->
+<div>
+<label class="block text-xs font-bold text-text-primary mb-1.5 ml-0.5" for="userIdentifier" id="labelIdentifier">
+              University Reg No / Roll No
+            </label>
+<div class="interactive-input relative rounded-2xl group focus-within:border-primary">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted group-focus-within:text-primary transition-colors">
+<!-- Student ID / Card Icon -->
+<svg class="w-4 h-4" fill="none" id="identifierIcon" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<rect height="16" rx="3" width="18" x="3" y="4"></rect>
+<circle cx="9" cy="10" r="2"></circle>
+<line x1="15" x2="17" y1="9" y2="9"></line>
+<line x1="15" x2="17" y1="13" y2="13"></line>
+<path d="M7 16a2 2 0 0 1 4 0"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-3.5 py-2.5 text-sm bg-surface-container-low border border-border-subtle rounded-xl font-semibold text-text-primary placeholder:text-outline-variant focus:bg-white focus:outline-none focus:border-primary transition uppercase tracking-wider" id="userIdentifier" name="userIdentifier" placeholder="E.G. TJC21CS042" required="" type="text">
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1 ml-0.5 flex items-center gap-1 font-medium" id="identifierHint">
+<svg class="w-3.5 h-3.5 text-primary inline shrink-0" fill="currentColor" viewBox="0 0 20 20"><path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path></svg>
+<span class="">KTU Smart ID / Roll Number</span>
+</p>
+</div>
+<!-- Input 2: Password / Secret -->
+<div>
+<div class="interactive-input relative rounded-2xl group focus-within:border-primary">
+<label class="text-xs font-bold text-text-primary" for="userSecret" id="labelSecret">
+                Password / DOB (DDMMYYYY)
+              </label>
+<a class="text-xs font-bold text-text-secondary hover:text-primary transition active:underline" href="#">
+                Forgot Password?
+              </a>
+</div>
+<div class="interactive-input relative rounded-2xl group focus-within:border-primary">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted group-focus-within:text-primary transition-colors">
+<!-- Lock Icon -->
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<rect height="11" rx="2" ry="2" width="18" x="3" y="11"></rect>
+<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-11 py-2.5 text-sm bg-surface-container-low border border-border-subtle rounded-xl font-medium text-text-primary placeholder:text-outline-variant focus:bg-white focus:outline-none focus:border-primary transition" id="userSecret" name="userSecret" placeholder="••••••••••••" required="" type="password">
+<!-- Toggle Visibility Button -->
+<button aria-label="Toggle password visibility" class="tap-press absolute inset-y-0 right-0 pr-3.5 flex items-center text-text-muted hover:text-text-primary focus:outline-none cursor-pointer" onclick="togglePasswordVisibility()" type="button">
+<svg class="w-4 h-4" fill="none" id="eyeIcon" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+</button>
+</div>
+</div>
+<!-- Input 3: Assigned Bus Route Dropdown -->
+<div id="routeSelectorContainer">
+<div class="flex items-center justify-between mb-1.5 ml-0.5">
+<label class="block text-xs font-bold text-text-primary" for="busRoute">
+                Assigned Bus Route
+              </label>
+<span class="text-[10px] bg-badge-active-bg text-badge-active-text px-2 py-0.5 rounded-full font-bold border border-periwinkle-light">
+                Route Active
+              </span>
+</div>
+<div class="interactive-input relative rounded-xl group">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-primary">
+<!-- Bus Front Icon -->
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M19 17h2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10h2"></path>
+<circle cx="7" cy="17" r="2"></circle>
+<path d="M9 17h6"></path>
+<circle cx="17" cy="17" r="2"></circle>
+</svg>
+</div>
+<select class="block w-full pl-10 pr-9 py-2.5 text-xs bg-surface-container-low border border-border-subtle rounded-xl font-semibold text-text-primary focus:bg-white focus:ring-2 focus:ring-primary/30 focus:border-primary focus:outline-none transition appearance-none cursor-pointer" id="busRoute" name="busRoute">
+<option selected="" value="01">Bus 01 — Kanjirappally (Driver: Biju Mathew)</option>
+<option value="02">Bus 02 — Pala (Driver: Ramesh)</option>
+<option value="03">Bus 03 — Ettumanoor (Driver: Sijo Thomas)</option>
+<option value="04">Bus 04 — Changanassery (Driver: Renju)</option>
+<option value="all">Auto-Detect via GPS &amp; Digital Pass</option>
+</select>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-text-muted">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Secondary Actions: Remember Me & Pass Badge -->
+<div class="flex items-center justify-between pt-0.5">
+<label class="flex items-center space-x-2 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary border-border-subtle focus:ring-primary/40 focus:ring-offset-0 transition cursor-pointer" name="rememberMe" type="checkbox">
+<span class="text-xs text-text-primary font-semibold">Remember Me</span>
+</label>
+<div class="flex items-center gap-1.5 text-[11px] text-badge-active-text font-bold bg-lavender-subtle px-2 py-0.5 rounded-lg border border-periwinkle-light">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="">2024-25 Pass Valid</span>
+</div>
+</div>
+<!-- Primary CTA Button -->
+<div class="pt-2">
+<button class="btn-bounce w-full bg-gradient-to-r from-primary via-[#5d67cf] to-[#7c83fd] text-white py-3.5 px-4 rounded-xl font-bold text-sm shadow-btn-primary flex items-center justify-center gap-2 select-none cursor-pointer" data-purpose="submit-login-button" type="submit">
+<span class="">Sign In to Transit</span>
+<svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</button>
+</div>
+</form>
+<!-- BEGIN: Quick Sign-in Divider -->
+<div class="relative my-4">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-border-subtle"></div>
+</div>
+<div class="relative flex justify-center text-[10px] uppercase tracking-wider font-bold">
+<span class="bg-surface-card px-3 text-text-muted">Or Quick Sign-in</span>
+</div>
+</div>
+<!-- END: Quick Sign-in Divider -->
+<!-- BEGIN: Quick Campus Access Buttons -->
+<div class="grid grid-cols-2 gap-2.5" data-purpose="alternative-auth-options">
+<button class="quick-auth-btn flex items-center gap-2.5 p-2.5 bg-surface-container-low hover:bg-lavender-subtle border border-border-subtle rounded-2xl text-left group cursor-pointer select-none" onclick="triggerSmartCardPrompt()" type="button">
+<div class="w-9 h-9 rounded-xl bg-badge-active-bg text-primary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M6 8.32a7.43 7.43 0 0 1 0 7.36"></path>
+<path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58"></path>
+<path d="M12.91 4.1a15.91 15.91 0 0 1 0 15.8"></path>
+</svg>
+</div>
+<div class="overflow-hidden">
+<span class="block text-xs font-bold text-text-primary leading-tight">Tap RFID Card</span>
+<span class="block text-[10px] text-text-muted font-medium truncate">NFC Terminal</span>
+</div>
+</button>
+<button class="quick-auth-btn flex items-center gap-2.5 p-2.5 bg-surface-container-low hover:bg-lavender-subtle border border-border-subtle rounded-2xl text-left group cursor-pointer select-none" onclick="triggerBiometricPrompt()" type="button">
+<div class="w-9 h-9 rounded-xl bg-lavender-subtle text-secondary flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+<path d="M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+</svg>
+</div>
+<div class="overflow-hidden">
+<span class="block text-xs font-bold text-text-primary leading-tight">Biometric</span>
+<span class="block text-[10px] text-text-muted font-medium truncate">Face ID / Touch</span>
+</div>
+</button>
+</div>
+<!-- END: Quick Campus Access Buttons -->
+</div>
+<!-- END: Elevated Login Card -->
+<!-- BEGIN: Minimal Footer -->
+<footer class="mt-4 pt-2 text-center" data-purpose="screen-footer">
+<p class="text-[11px] text-on-surface-variant leading-normal">
+          First time boarding? Contact <a class="text-primary font-bold hover:underline" href="#">Transportation Desk</a> for assistance.
+        </p>
+<div class="mt-1 text-[10px] text-text-muted font-semibold tracking-wide">
+          Thejus Engineering College • Central Transportation Facility
+        </div>
+<!-- iOS Bottom Home Indicator Bar -->
+<div class="w-32 h-1 bg-border-hover rounded-full mx-auto mt-3 mb-0.5"></div>
+</footer>
+<!-- END: Minimal Footer -->
+</main>
+<!-- END: Form Container -->
+</div>
+<!-- END: Mobile Device Canvas Frame -->
+<!-- BEGIN: Interactive Role Switching & Form Behaviors -->
+<script data-purpose="role-toggle-logic">
+    let currentRole = 'student';
+
+    function selectRole(role) {
+      currentRole = role;
+     
+      const tabStudent = document.getElementById('tabStudent');
+      const tabFaculty = document.getElementById('tabFaculty');
+      const labelIdentifier = document.getElementById('labelIdentifier');
+      const userIdentifier = document.getElementById('userIdentifier');
+      const identifierHint = document.getElementById('identifierHint');
+      const labelSecret = document.getElementById('labelSecret');
+      const routeContainer = document.getElementById('routeSelectorContainer');
+
+      if (role === 'student') {
+        tabStudent.className = "flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-full text-xs font-bold transition-all duration-200 bg-white text-primary shadow-pill";
+        tabStudent.setAttribute('aria-selected', 'true');
+
+        tabFaculty.className = "flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-full text-xs font-semibold text-on-surface-variant hover:text-text-primary transition-all duration-200";
+        tabFaculty.setAttribute('aria-selected', 'false');
+
+        labelIdentifier.innerText = "University Reg No / Roll No";
+        userIdentifier.placeholder = "E.G. TJC21CS042";
+        userIdentifier.value = "";
+        identifierHint.innerHTML = `
+          <svg class="w-3.5 h-3.5 text-primary inline shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          <span>KTU Smart ID / Roll Number</span>
+        `;
+        labelSecret.innerText = "Password / DOB (DDMMYYYY)";
+        routeContainer.style.display = "block";
+      } else {
+        tabFaculty.className = "flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-full text-xs font-bold transition-all duration-200 bg-white text-primary shadow-pill";
+        tabFaculty.setAttribute('aria-selected', 'true');
+
+        tabStudent.className = "flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-full text-xs font-semibold text-on-surface-variant hover:text-text-primary transition-all duration-200";
+        tabStudent.setAttribute('aria-selected', 'false');
+
+        labelIdentifier.innerText = "Employee ID / Institutional Email";
+        userIdentifier.placeholder = "E.G. FAC8892 OR STAFF@THEJUS.AC.IN";
+        userIdentifier.value = "";
+        identifierHint.innerHTML = `
+          <svg class="w-3.5 h-3.5 text-primary inline shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+          <span>Faculty & Transit In-Charge Portal</span>
+        `;
+        labelSecret.innerText = "College Portal Password";
+        routeContainer.style.display = "block";
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const secretInput = document.getElementById('userSecret');
+      const eyeIcon = document.getElementById('eyeIcon');
+     
+      if (secretInput.type === "password") {
+        secretInput.type = "text";
+        eyeIcon.innerHTML = `
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+        `;
+      } else {
+        secretInput.type = "password";
+        eyeIcon.innerHTML = `
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        `;
+      }
+    }
+
+    function triggerSmartCardPrompt() {
+      alert("NFC Smart Reader Ready: Hold your Thejus College NFC identity card near the back of the device to authenticate.");
+    }
+
+    function triggerBiometricPrompt() {
+      alert("Authenticating via Apple Face ID / Touch ID...");
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const identifier = document.getElementById('userIdentifier').value;
+      const bus = document.getElementById('busRoute').value;
+      alert(`Transit verified for ${identifier}! Connecting to Bus ${bus} live telemetry...`);
+    }
+  </script>
+<!-- END: Interactive Role Switching & Form Behaviors -->
+
+
+</body></html>

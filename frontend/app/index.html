@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#faf8ff">
+    <title>Thejway | College Bus Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to app content</a>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Thejway home">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span class="brand-copy">
+          <strong>Thejway</strong>
+          <span>College bus tracking</span>
+        </span>
+      </a>
+      <div class="role-tools">
+        <label for="role-select">Demo view</label>
+        <span class="sr-only" id="role-help">Choose a demo role to view its workflow.</span>
+        <select id="role-select" aria-describedby="role-help">
+          <option value="student">Student</option>
+          <option value="faculty">Faculty</option>
+          <option value="driver">Driver</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button class="button button-quiet" id="reset-demo" type="button">Reset demo</button>
+      </div>
+    </header>
+
+    <main class="page-shell" id="main">
+      <aside class="demo-notice" role="note">
+        <span class="notice-dot" aria-hidden="true"></span>
+        <div>
+          <strong>Prototype only — no live service is connected.</strong>
+          <p>All people, buses, routes, assignments, and attendance below are synthetic demo data. Changes reset when this page reloads.</p>
+        </div>
+      </aside>
+
+      <p class="eyebrow">Campus transit · Phase 1 workflow demo</p>
+      <div class="page-intro" id="view-intro"></div>
+      <p class="sr-only" id="live-announcement" aria-live="polite"></p>
+      <section id="dashboard" aria-labelledby="view-title"></section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Thejway</span>
+      <span>Payments are deferred to Phase 2.</span>
+    </footer>
+  </body>
+</html>
