@@ -5,6 +5,7 @@
 - Work only on Thejway, the college bus-tracking app. Ignore unrelated game material.
 - The project owner's planned hosting/data direction is Vercel + Google Firestore. This is a plan, not a configured or implemented stack; do not claim integrations exist or invent authentication, schema, security rules, or deployment behavior.
 - Human requirements, architecture, provenance, and discussion notes are maintained on the [project wiki](https://github.com/abhishkpram/thejway/wiki). Read its Requirements and Architecture and setup pages before changing product behavior or planning integrations.
+- For the dated implementation and environment snapshot, see [the latest session handoff](docs/session-handoff-2026-11-10.md); it is context, not a replacement for requirements.
 - Use `.github/skills/thejway-bus-tracking/SKILL.md` for the reusable requirements and implementation workflow.
 - Treat the requirements email as authoritative over Stitch and email HTML prototypes. Preserve `frontend/prototype-v2/` as source reference material; do not overwrite it with app code.
 
