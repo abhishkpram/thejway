@@ -2,53 +2,99 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#faf8ff">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#4953bc">
+    <meta name="description" content="Thejway college bus tracking — Phase 1 workflow demo. Synthetic data only.">
     <title>Thejway | College Bus Tracking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="app.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to app content</a>
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="Thejway home">
-        <span class="brand-mark" aria-hidden="true">T</span>
-        <span class="brand-copy">
-          <strong>Thejway</strong>
-          <span>College bus tracking</span>
-        </span>
-      </a>
-      <div class="role-tools">
-        <label for="role-select">Demo view</label>
-        <span class="sr-only" id="role-help">Choose a demo role to view its workflow.</span>
-        <select id="role-select" aria-describedby="role-help">
-          <option value="student">Student</option>
-          <option value="faculty">Faculty</option>
-          <option value="driver">Driver</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button class="button button-quiet" id="reset-demo" type="button">Reset demo</button>
-      </div>
-    </header>
 
-    <main class="page-shell" id="main">
-      <aside class="demo-notice" role="note">
-        <span class="notice-dot" aria-hidden="true"></span>
-        <div>
-          <strong>Prototype only — no live service is connected.</strong>
-          <p>All people, buses, routes, assignments, and attendance below are synthetic demo data. Changes reset when this page reloads.</p>
+    <div class="app-frame">
+      <header class="app-hero">
+        <div class="hero-pattern" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+
+        <div class="hero-top">
+          <a class="brand" href="./">
+            <span class="brand-mark" aria-hidden="true">
+              <span class="material-symbols-outlined">directions_bus</span>
+            </span>
+            <span class="brand-copy">
+              <span class="brand-eyebrow">Thejway Transit Portal</span>
+              <strong>Campus Fleet Access</strong>
+            </span>
+          </a>
+          <span class="hero-pill">
+            <span class="hero-pill-dot" aria-hidden="true"></span>
+            Demo mode
+          </span>
         </div>
-      </aside>
 
-      <p class="eyebrow">Campus transit · Phase 1 workflow demo</p>
-      <div class="page-intro" id="view-intro"></div>
-      <p class="sr-only" id="live-announcement" aria-live="polite"></p>
-      <section id="dashboard" aria-labelledby="view-title"></section>
-    </main>
+        <div class="hero-copy">
+          <p class="hero-eyebrow" id="hero-eyebrow">Student dashboard</p>
+          <h1 id="view-title">Today's ride</h1>
+          <p id="view-subtitle">Assigned transportation and today's ride status.</p>
+        </div>
 
-    <footer class="site-footer">
-      <span>Thejway</span>
-      <span>Payments are deferred to Phase 2.</span>
-    </footer>
+        <div class="hero-meta">
+          <span class="hero-meta-item">
+            <span class="material-symbols-outlined" aria-hidden="true">event</span>
+            <span id="today-label">Today</span>
+          </span>
+          <span class="hero-meta-item">
+            <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+            Phase 1 workflow
+          </span>
+        </div>
+      </header>
+
+      <main class="app-main" id="main">
+        <aside class="demo-notice" role="note">
+          <span class="notice-icon material-symbols-outlined" aria-hidden="true">info</span>
+          <div>
+            <strong>Prototype only — no live service is connected.</strong>
+            <p>All people, buses, routes, assignments, and attendance below are synthetic demo data. Changes reset when this page reloads.</p>
+          </div>
+        </aside>
+
+        <section class="demo-controls" aria-label="Demo controls">
+          <div class="segmented" role="group" aria-label="Choose a demo role">
+            <button class="segmented-button is-active" type="button" data-role="student" data-label="Student" aria-pressed="true">
+              <span class="material-symbols-outlined" aria-hidden="true">school</span>
+              Student
+            </button>
+            <button class="segmented-button" type="button" data-role="faculty" data-label="Faculty" aria-pressed="false">
+              <span class="material-symbols-outlined" aria-hidden="true">badge</span>
+              Faculty
+            </button>
+            <button class="segmented-button" type="button" data-role="driver" data-label="Driver" aria-pressed="false">
+              <span class="material-symbols-outlined" aria-hidden="true">directions_bus</span>
+              Driver
+            </button>
+            <button class="segmented-button" type="button" data-role="admin" data-label="Admin" aria-pressed="false">
+              <span class="material-symbols-outlined" aria-hidden="true">admin_panel_settings</span>
+              Admin
+            </button>
+          </div>
+          <button class="button button-quiet" id="reset-demo" type="button">
+            <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span>
+            Reset demo
+          </button>
+        </section>
+
+        <p class="sr-only" id="live-announcement" aria-live="polite"></p>
+        <section id="dashboard" aria-labelledby="view-title"></section>
+      </main>
+
+      <nav class="bottom-nav" id="bottom-nav" aria-label="Demo navigation"></nav>
+    </div>
   </body>
 </html>

@@ -13,6 +13,12 @@ const riders = [
   { id: "faculty-01", name: "Demo faculty 01", role: "Faculty", stop: "Demo stop 02" },
 ];
 
+const demoDriver = {
+  name: "Demo driver",
+  phone: "Not configured in this demo",
+  initials: "DD",
+};
+
 const initialAssignments = new Map(riders.map((rider) => [rider.id, "bus-01"]));
 const state = {
   role: "student",
@@ -20,11 +26,17 @@ const state = {
   assignments: new Map(initialAssignments),
 };
 
-const roleSelect = document.querySelector("#role-select");
-const resetButton = document.querySelector("#reset-demo");
 const dashboard = document.querySelector("#dashboard");
-const intro = document.querySelector("#view-intro");
+const roleGroup = document.querySelector(".segmented");
+const resetButton = document.querySelector("#reset-demo");
 const announcement = document.querySelector("#live-announcement");
+const heroEyebrow = document.querySelector("#hero-eyebrow");
+const viewTitle = document.querySelector("#view-title");
+const viewSubtitle = document.querySelector("#view-subtitle");
+const todayLabel = document.querySelector("#today-label");
+const bottomNav = document.querySelector("#bottom-nav");
+
+let focusAfterRender = null;
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (character) => ({
@@ -34,6 +46,20 @@ function escapeHtml(value) {
     '"': "&quot;",
     "'": "&#39;",
   })[character]);
+}
+
+function icon(name) {
+  return `<span class="material-symbols-outlined" aria-hidden="true">${name}</span>`;
+}
+
+function initials(name) {
+  return String(name)
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
 }
 
 function getBus(busId) {
@@ -50,8 +76,56 @@ function getActiveRider() {
     : riders.find((rider) => rider.role === "Student");
 }
 
-function setIntro(title, description) {
-  intro.innerHTML = `<h1 id="view-title">${escapeHtml(title)}</h1><p>${escapeHtml(description)}</p>`;
+function setIntro(eyebrow, title, subtitle) {
+  heroEyebrow.textContent = eyebrow;
+  viewTitle.textContent = title;
+  viewSubtitle.textContent = subtitle;
+}
+
+function announce(message) {
+  announcement.textContent = message;
+}
+
+function renderRoleButtons() {
+  roleGroup.querySelectorAll("[data-role]").forEach((button) => {
+    const active = button.dataset.role === state.role;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function renderNav(items) {
+  bottomNav.innerHTML = items.map((item, index) => `
+    <a class="nav-item" href="${escapeHtml(item.href)}" ${index === 0 ? 'aria-current="page"' : ""}>
+      ${icon(item.icon)}
+      <span>${escapeHtml(item.label)}</span>
+    </a>
+  `).join("");
+}
+
+function renderMapPreview() {
+  return `
+    <div class="map-canvas" role="img" aria-label="Stylised route preview. Live GPS and Google Maps are not connected.">
+      <span class="status-pill status-warning map-preview-pill">Preview only</span>
+      <svg class="map-svg" viewBox="0 0 390 260" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 38 222 C 92 190, 112 168, 160 144 C 212 118, 252 92, 344 38" stroke="#818cf8" stroke-opacity="0.28" stroke-linecap="round" stroke-width="14"></path>
+        <path d="M 38 222 C 92 190, 112 168, 160 144" stroke="#674bb5" stroke-linecap="round" stroke-width="5"></path>
+        <path d="M 160 144 C 212 118, 252 92, 344 38" stroke="#818cf8" stroke-dasharray="8 5" stroke-linecap="round" stroke-width="5"></path>
+        <circle cx="38" cy="222" r="9" fill="#c7d2fe" fill-opacity="0.7"></circle>
+        <circle cx="38" cy="222" r="5" fill="#674bb5"></circle>
+        <circle cx="160" cy="144" r="4.5" fill="#674bb5"></circle>
+        <circle cx="244" cy="103" r="6" fill="#818cf8" fill-opacity="0.45"></circle>
+        <circle cx="244" cy="103" r="3.5" fill="#4953bc"></circle>
+        <circle cx="344" cy="38" r="12" fill="#ffdad6" fill-opacity="0.8"></circle>
+        <circle cx="344" cy="38" r="7" fill="#ba1a1a"></circle>
+      </svg>
+      <div class="map-bus" aria-hidden="true">${icon("directions_bus")}</div>
+      <div class="map-overlay">
+        <strong>${icon("location_off")} Live tracking is unavailable</strong>
+        <span>No GPS feed or Google Maps service is connected. This is a design preview only.</span>
+      </div>
+    </div>
+  `;
 }
 
 function renderRiderView() {
@@ -61,65 +135,132 @@ function renderRiderView() {
   const roleName = state.role === "faculty" ? "Faculty" : "Student";
   const attendanceText = absent ? "Marked absent today" : "Expected to ride today";
   const attendanceClass = absent ? "status-absent" : "status-expected";
+  const busNumber = bus ? bus.label.replace("Bus ", "") : "--";
+  const assignedStop = rider.stop;
 
   setIntro(
     `${roleName} dashboard`,
-    `${rider.name} · Assigned transportation and today's ride status.`,
+    `${roleName} ride overview`,
+    `${rider.name} · Your assigned transportation and today's ride status.`,
   );
 
   return `
     <div class="dashboard-grid">
       <section class="panel panel-wide" aria-labelledby="ride-heading">
         <div class="panel-heading">
-          <div>
-            <h2 id="ride-heading">Today's ride</h2>
-            <p class="panel-copy">Your assignment is managed by the college admin.</p>
+          <div class="panel-title">
+            <span class="panel-icon">${icon("directions_bus")}</span>
+            <div>
+              <h2 id="ride-heading">Today's ride</h2>
+              <p class="panel-copy">Your assignment is managed by the college admin.</p>
+            </div>
           </div>
           <span class="status-pill ${attendanceClass}">${attendanceText}</span>
         </div>
-        <div class="metric-grid">
-          <div class="metric"><span>Assigned bus</span><strong>${bus ? escapeHtml(bus.label) : "Not assigned"}</strong></div>
-          <div class="metric"><span>Route</span><strong>${bus ? escapeHtml(bus.route) : "Not assigned"}</strong></div>
-          <div class="metric"><span>Driver</span><strong>Demo driver</strong></div>
+
+        <div class="ride-card">
+          <div class="ride-identity">
+            <div class="bus-badge" aria-hidden="true">
+              ${icon("directions_bus")}
+              <strong>${escapeHtml(busNumber)}</strong>
+            </div>
+            <div class="ride-identity-copy">
+              <span class="overline">Assigned bus</span>
+              <strong class="ride-title">${bus ? escapeHtml(bus.label) : "Not assigned"}</strong>
+              <span class="ride-route">${bus ? escapeHtml(bus.route) : "Ask the college admin for an assignment."}</span>
+            </div>
+          </div>
+
+          <div class="ride-stats">
+            <div class="ride-stat">
+              ${icon("route")}
+              <span><small>Route</small><strong>${bus ? escapeHtml(bus.route) : "Not assigned"}</strong></span>
+            </div>
+            <div class="ride-stat">
+              ${icon("person")}
+              <span><small>Driver</small><strong>${escapeHtml(demoDriver.name)}</strong></span>
+            </div>
+            <div class="ride-stat">
+              ${icon("location_on")}
+              <span><small>Your stop</small><strong>${escapeHtml(assignedStop)}</strong></span>
+            </div>
+          </div>
         </div>
-        <label class="attendance-control" for="absence-toggle">
-          <input id="absence-toggle" type="checkbox" data-absence="${escapeHtml(rider.id)}" ${absent ? "checked" : ""}>
-          <span>
+
+        <label class="attendance-control" id="attendance-heading" for="absence-toggle">
+          <span class="attendance-icon">${icon("event_busy")}</span>
+          <span class="attendance-copy">
             <strong>I will not be on the bus today</strong>
             <small>Only mark this when you will not travel. If you do nothing, the driver sees you as expected.</small>
+          </span>
+          <span class="switch">
+            <input id="absence-toggle" type="checkbox" data-absence="${escapeHtml(rider.id)}" ${absent ? "checked" : ""}>
+            <span class="switch-track" aria-hidden="true"></span>
           </span>
         </label>
       </section>
 
       <section class="panel panel-narrow" aria-labelledby="driver-heading">
-        <h2 id="driver-heading">Route driver</h2>
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="panel-icon">${icon("support_agent")}</span>
+            <div>
+              <h2 id="driver-heading">Route driver</h2>
+              <p class="panel-copy">The driver assigned to your bus.</p>
+            </div>
+          </div>
+        </div>
         <div class="list-stack">
-          <div class="list-row"><span><strong>Demo driver</strong><small>Assigned route driver</small></span></div>
-          <div class="list-row"><span><strong>Mobile number</strong><small>Not configured in this demo</small></span></div>
+          <div class="person-row">
+            <div class="person">
+              <span class="avatar avatar-primary" aria-hidden="true">${escapeHtml(demoDriver.initials)}</span>
+              <span class="person-copy">
+                <strong>${escapeHtml(demoDriver.name)}</strong>
+                <small>Assigned route driver</small>
+              </span>
+            </div>
+          </div>
+          <div class="person-row">
+            <div class="person">
+              <span class="avatar avatar-sky" aria-hidden="true">${icon("call")}</span>
+              <span class="person-copy">
+                <strong>Mobile number</strong>
+                <small>${escapeHtml(demoDriver.phone)}</small>
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="panel panel-wide" aria-labelledby="location-heading">
         <div class="panel-heading">
-          <div>
-            <h2 id="location-heading">Bus location</h2>
-            <p class="panel-copy">The production app is intended to show the driver's phone location.</p>
+          <div class="panel-title">
+            <span class="panel-icon">${icon("near_me")}</span>
+            <div>
+              <h2 id="location-heading">Bus location</h2>
+              <p class="panel-copy">The production app is intended to show the driver's phone location.</p>
+            </div>
           </div>
           <span class="status-pill status-offline">Not connected</span>
         </div>
-        <div class="map-placeholder">
-          <div>
-            <strong>Live tracking is unavailable</strong>
-            <span>No GPS feed or Google Maps service is connected.</span>
-          </div>
-        </div>
+        ${renderMapPreview()}
       </section>
 
       <aside class="panel panel-narrow" aria-labelledby="phase-heading">
-        <h2 id="phase-heading">Release scope</h2>
-        <p class="panel-copy">Absence marking and bus tracking are Phase 1. Fee details and payments are deferred to Phase 2.</p>
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="panel-icon">${icon("verified_user")}</span>
+            <div>
+              <h2 id="phase-heading">Release scope</h2>
+            </div>
+          </div>
+        </div>
+        <p class="phase-note" style="margin-top: 0.8rem;">
+          Absence marking and bus tracking are Phase 1. Fee details and payments are deferred to Phase 2.
+        </p>
       </aside>
-    </div>`;
+    </div>
+  `;
 }
 
 function renderDriverView() {
@@ -132,7 +273,7 @@ function renderDriverView() {
     const allAbsent = stopRiders.length > 0
       && stopRiders.every((rider) => state.absences.has(rider.id));
     const statusClass = stopRiders.length === 0
-      ? "status-offline"
+      ? "status-neutral"
       : allAbsent ? "status-pass" : "status-stop";
     const statusText = stopRiders.length === 0
       ? "No demo riders mapped"
@@ -140,113 +281,260 @@ function renderDriverView() {
     const riderRows = stopRiders.length
       ? stopRiders.map((rider) => {
         const absent = state.absences.has(rider.id);
-        return `<div class="list-row"><span><strong>${escapeHtml(rider.name)}</strong><small>${escapeHtml(rider.role)}</small></span><span class="status-pill ${absent ? "status-absent" : "status-expected"}">${absent ? "Absent" : "Expected"}</span></div>`;
+        return `
+          <div class="rider-row">
+            <div class="person">
+              <span class="avatar ${absent ? "avatar-sky" : "avatar-primary"}" aria-hidden="true">${escapeHtml(initials(rider.name))}</span>
+              <span class="person-copy">
+                <strong>${escapeHtml(rider.name)}</strong>
+                <small>${escapeHtml(rider.role)} · ${escapeHtml(rider.stop)}</small>
+              </span>
+            </div>
+            <span class="status-pill ${absent ? "status-absent" : "status-expected"}">${absent ? "Absent" : "Expected"}</span>
+          </div>
+        `;
       }).join("")
-      : `<p class="panel-copy">Stop assignment is not configured for this demo.</p>`;
+      : `<div class="empty-state">${icon("person_off")}<strong>No demo riders mapped</strong><span>Stop assignment is not configured for this demo.</span></div>`;
 
     return `
-      <article class="panel panel-wide" aria-labelledby="stop-${index + 1}-heading">
-        <div class="panel-heading">
-          <div><h2 id="stop-${index + 1}-heading">${escapeHtml(stop)}</h2><p class="panel-copy">Upcoming stop ${index + 1}</p></div>
-          <span class="status-pill ${statusClass}">${statusText}</span>
+      <article class="panel panel-wide stop-card" aria-labelledby="stop-${index + 1}-heading">
+        <div class="stop-marker" aria-hidden="true">
+          <span class="stop-index">${index + 1}</span>
+          <span class="stop-line"></span>
         </div>
-        <div class="list-stack">${riderRows}</div>
-      </article>`;
+        <div class="stop-content">
+          <div class="panel-heading">
+            <div>
+              <span class="overline">Upcoming stop ${index + 1}</span>
+              <h2 id="stop-${index + 1}-heading">${escapeHtml(stop)}</h2>
+            </div>
+            <span class="status-pill ${statusClass}">${statusText}</span>
+          </div>
+          <div class="list-stack">${riderRows}</div>
+        </div>
+      </article>
+    `;
   }).join("");
 
-  setIntro("Driver dashboard", "Route and upcoming rider status for the demo bus.");
+  setIntro(
+    "Driver dashboard",
+    `${bus.label} · ${bus.route}`,
+    "Upcoming rider status for the demo bus. The route itself does not change.",
+  );
 
   return `
     <div class="dashboard-grid">
-      <section class="panel panel-full" aria-labelledby="route-heading">
+      <section class="panel panel-full route-banner" aria-labelledby="route-heading">
         <div class="panel-heading">
-          <div>
-            <h2 id="route-heading">${escapeHtml(bus.label)} · ${escapeHtml(bus.route)}</h2>
-            <p class="panel-copy">The route is assigned to the driver or bus. This sample route is not real route data.</p>
+          <div class="panel-title">
+            <span class="panel-icon">${icon("alt_route")}</span>
+            <div>
+              <h2 id="route-heading">${escapeHtml(bus.label)} · ${escapeHtml(bus.route)}</h2>
+              <p class="panel-copy">The route is assigned to the driver or bus. This sample route is not real route data.</p>
+            </div>
           </div>
           <span class="status-pill status-offline">Phone GPS not connected</span>
         </div>
+        <div class="route-track" aria-hidden="true">
+          ${stopIds.map((stop, index) => `
+            <div class="route-stop ${index === 0 ? "is-current" : ""}">
+              <span class="route-stop-dot"></span>
+              <small>${escapeHtml(stop)}</small>
+            </div>
+          `).join("")}
+        </div>
       </section>
+
       ${stopCards}
-      <aside class="panel panel-full">
-        <p class="phase-note"><strong>Driver decision:</strong> “Eligible to pass” means every demo rider at that stop marked absent. The app does not automatically alter the route or direct a real driver.</p>
+
+      <aside class="panel panel-full" id="share-heading" aria-labelledby="share-title">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="panel-icon">${icon("sensors")}</span>
+            <div>
+              <h2 id="share-title">Phone GPS sharing</h2>
+              <p class="panel-copy">Production will share the driver's phone location through the app; no separate GPS hardware is required.</p>
+            </div>
+          </div>
+          <span class="status-pill status-offline">Not connected</span>
+        </div>
+        <p class="phase-note" style="margin-top: 0.8rem;">
+          This demo does not request location permission or send coordinates anywhere. GPS cadence, stale-location handling, and offline behavior remain open decisions.
+        </p>
       </aside>
-    </div>`;
+
+      <aside class="panel panel-full" id="driver-decision" aria-labelledby="decision-title">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="panel-icon">${icon("fact_check")}</span>
+            <div>
+              <h2 id="decision-title">Driver decision</h2>
+            </div>
+          </div>
+        </div>
+        <p class="phase-note" style="margin-top: 0.8rem;">
+          <strong>Eligible to pass</strong> means every demo rider at that stop marked absent. The app does not automatically alter the route or direct a real driver.
+        </p>
+      </aside>
+    </div>
+  `;
 }
 
 function renderAdminView() {
-  setIntro("Admin dashboard", "Assign demo riders to a bus and its route. Students cannot change these assignments.");
+  setIntro(
+    "Admin dashboard",
+    "Fleet & route control",
+    "Assign demo riders to a bus and its route. Students cannot change these assignments.",
+  );
 
-  const assignmentRows = riders.map((rider) => {
+  const assignmentCards = riders.map((rider) => {
     const assignedBusId = state.assignments.get(rider.id);
     const assignedBus = getBus(assignedBusId);
     const options = fleet.map((bus) => `
       <option value="${escapeHtml(bus.id)}" ${bus.id === assignedBusId ? "selected" : ""}>
         ${escapeHtml(bus.label)}
-      </option>`).join("");
+      </option>
+    `).join("");
 
     return `
-      <tr>
-        <th scope="row">${escapeHtml(rider.name)}</th>
-        <td>${escapeHtml(rider.role)}</td>
-        <td>
-          <label class="sr-only" for="assignment-${escapeHtml(rider.id)}">Bus assignment for ${escapeHtml(rider.name)}</label>
-          <select class="assignment-select" id="assignment-${escapeHtml(rider.id)}" data-assignment="${escapeHtml(rider.id)}">
-            ${options}
-          </select>
-        </td>
-        <td>${assignedBus ? escapeHtml(assignedBus.route) : "Not assigned"}</td>
-      </tr>`;
+      <article class="assignment-card">
+        <div class="assignment-person">
+          <span class="avatar avatar-primary" aria-hidden="true">${escapeHtml(initials(rider.name))}</span>
+          <span class="person-copy">
+            <strong>${escapeHtml(rider.name)}</strong>
+            <small>${escapeHtml(rider.role)} · ${escapeHtml(rider.stop)}</small>
+          </span>
+        </div>
+        <div class="assignment-fields">
+          <label class="field" for="assignment-${escapeHtml(rider.id)}">
+            <span>Assigned bus</span>
+            <select id="assignment-${escapeHtml(rider.id)}" data-assignment="${escapeHtml(rider.id)}">
+              ${options}
+            </select>
+          </label>
+          <div class="field">
+            <span>Route</span>
+            <div class="assignment-route">${icon("route")}${assignedBus ? escapeHtml(assignedBus.route) : "Not assigned"}</div>
+          </div>
+        </div>
+      </article>
+    `;
   }).join("");
 
   return `
     <div class="dashboard-grid">
+      <div class="kpi-grid" id="admin-overview" aria-label="Demo fleet summary">
+        <div class="kpi-card">
+          <div class="kpi-copy">
+            <span>Total fleet</span>
+            <strong>${fleet.length}</strong>
+            <small>Demo buses</small>
+          </div>
+          <span class="kpi-icon">${icon("directions_bus")}</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-copy">
+            <span>Riders</span>
+            <strong>${riders.length}</strong>
+            <small>Students &amp; faculty</small>
+          </div>
+          <span class="kpi-icon sky">${icon("group")}</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-copy">
+            <span>Mapped stops</span>
+            <strong>2</strong>
+            <small>Demo stop data</small>
+          </div>
+          <span class="kpi-icon">${icon("location_on")}</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-copy">
+            <span>Release</span>
+            <strong>Phase 1</strong>
+            <small>Payments deferred</small>
+          </div>
+          <span class="kpi-icon rose">${icon("payments")}</span>
+        </div>
+      </div>
+
       <section class="panel panel-full" aria-labelledby="assignment-heading">
         <div class="panel-heading">
-          <div>
-            <h2 id="assignment-heading">Student and faculty assignments</h2>
-            <p class="panel-copy">Only the admin view can edit bus assignments. Each bus maps to a demo route.</p>
+          <div class="panel-title">
+            <span class="panel-icon">${icon("group")}</span>
+            <div>
+              <h2 id="assignment-heading">Rider assignments</h2>
+              <p class="panel-copy">Only the admin view can edit bus assignments. Each bus maps to a demo route.</p>
+            </div>
           </div>
           <span class="status-pill status-expected">${fleet.length} demo buses</span>
         </div>
-        <div class="table-wrap">
-          <table>
-            <caption>All records and bus routes are synthetic.</caption>
-            <thead><tr><th scope="col">Rider</th><th scope="col">Role</th><th scope="col">Bus</th><th scope="col">Route</th></tr></thead>
-            <tbody>${assignmentRows}</tbody>
-          </table>
-        </div>
+        <div class="assignment-grid">${assignmentCards}</div>
       </section>
-      <aside class="panel panel-full">
-        <p class="phase-note"><strong>Production boundary:</strong> this browser-only demo does not authenticate admins or save assignments to the cloud. The production role-provisioning method is still undecided.</p>
-      </aside>
-    </div>`;
-}
 
-function announce(message) {
-  announcement.textContent = message;
+      <aside class="panel panel-full" id="admin-boundary" aria-labelledby="boundary-heading">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <span class="panel-icon">${icon("verified_user")}</span>
+            <div>
+              <h2 id="boundary-heading">Production boundary</h2>
+            </div>
+          </div>
+        </div>
+        <p class="phase-note" style="margin-top: 0.8rem;">
+          This browser-only demo does not authenticate admins or save assignments to the cloud. The production role-provisioning method is still undecided.
+        </p>
+      </aside>
+    </div>
+  `;
 }
 
 function render() {
+  renderRoleButtons();
+
   if (state.role === "student" || state.role === "faculty") {
     dashboard.innerHTML = renderRiderView();
-    return;
-  }
-  if (state.role === "driver") {
+    renderNav([
+      { label: "Home", icon: "home", href: "#ride-heading" },
+      { label: "Live GPS", icon: "near_me", href: "#location-heading" },
+      { label: "Attendance", icon: "event_busy", href: "#attendance-heading" },
+      { label: "Driver", icon: "person", href: "#driver-heading" },
+    ]);
+  } else if (state.role === "driver") {
     dashboard.innerHTML = renderDriverView();
-    return;
-  }
-  if (state.role === "admin") {
+    renderNav([
+      { label: "Route", icon: "alt_route", href: "#route-heading" },
+      { label: "Stops", icon: "list_alt", href: "#stop-1-heading" },
+      { label: "Share GPS", icon: "sensors", href: "#share-heading" },
+      { label: "Decision", icon: "fact_check", href: "#driver-decision" },
+    ]);
+  } else if (state.role === "admin") {
     dashboard.innerHTML = renderAdminView();
-    return;
+    renderNav([
+      { label: "Overview", icon: "dashboard", href: "#admin-overview" },
+      { label: "Riders", icon: "group", href: "#assignment-heading" },
+      { label: "Scope", icon: "verified_user", href: "#admin-boundary" },
+      { label: "Top", icon: "keyboard_arrow_up", href: "#main" },
+    ]);
+  } else {
+    throw new Error(`Unsupported demo role: ${state.role}`);
   }
-  throw new Error(`Unsupported demo role: ${state.role}`);
+
+  if (focusAfterRender) {
+    const selector = focusAfterRender;
+    focusAfterRender = null;
+    requestAnimationFrame(() => document.querySelector(selector)?.focus());
+  }
 }
 
-roleSelect.addEventListener("change", () => {
-  state.role = roleSelect.value;
+roleGroup.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-role]");
+  if (!button) {
+    return;
+  }
+  state.role = button.dataset.role;
   render();
-  announce(`Showing the ${roleSelect.options[roleSelect.selectedIndex].text} demo view.`);
+  announce(`Showing the ${button.dataset.label} demo view.`);
 });
 
 dashboard.addEventListener("change", (event) => {
@@ -262,6 +550,7 @@ dashboard.addEventListener("change", (event) => {
     } else {
       state.absences.delete(riderId);
     }
+    focusAfterRender = "#absence-toggle";
     render();
     announce(target.checked ? "You are marked absent in demo data." : "You are expected to ride in demo data.");
     return;
@@ -280,6 +569,7 @@ dashboard.addEventListener("change", (event) => {
       throw new Error("The selected demo rider or bus is not configured.");
     }
     state.assignments.set(riderId, bus.id);
+    focusAfterRender = `#assignment-${riderId}`;
     render();
     announce(`${rider.name} assigned to ${bus.label} in demo data.`);
   }
@@ -289,9 +579,14 @@ resetButton.addEventListener("click", () => {
   state.role = "student";
   state.absences.clear();
   state.assignments = new Map(initialAssignments);
-  roleSelect.value = "student";
   render();
   announce("Demo data reset.");
 });
+
+todayLabel.textContent = new Intl.DateTimeFormat(undefined, {
+  weekday: "short",
+  month: "short",
+  day: "numeric",
+}).format(new Date());
 
 render();
